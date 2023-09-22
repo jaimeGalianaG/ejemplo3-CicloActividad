@@ -3,11 +3,21 @@ package jaime.galiana.ejemplo3cicloactividad;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
+    private Button btnAbrir;
+
+    @Override protected void onRestart(){
+        super.onRestart();
+        Log.e("ESTADOS","7-Estoy en el metodo restart");
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -44,7 +54,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Log.e("ESTADOS", "1-Estoy en el metodo CREATE");
+        btnAbrir = findViewById(R.id.btnAbrirSecond);
+        btnAbrir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, SecondActiviy.class);
+                startActivity(intent);
+            }
+        });
+
+        Log.e("ESTADOS", "1-Estoy en el método CREATE");
     }
 
 }
